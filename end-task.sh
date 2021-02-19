@@ -11,7 +11,6 @@ switch="$($subTitleColor)Switch to develop$($resetColor)"
 sync="\n$($subTitleColor)Sync develop$($resetColor)"
 create="\n$($subTitleColor)Create branch $1$($resetColor)"
 rebase="\n$($subTitleColor)Rebase with develop$($resetColor)"
-switchTarget="\n$($subTitleColor)Switch to $branch$($resetColor)"
 
 # checkout root project
 echo -e "Finalizing changes to $($titleColor)APP $($resetColor)"
@@ -19,7 +18,7 @@ echo -e "$switch"
 git checkout develop
 echo -e "$sync"
 git pull origin develop
-echo -e "$switchTarget"
+echo -e "\n$($subTitleColor)Switch to $branch$($resetColor)"
 git checkout $branch
 echo -e "$rebase"
 git rebase develop
@@ -33,7 +32,7 @@ echo -e "$switch"
 git checkout develop
 echo -e "$sync"
 git pull origin develop
-echo -e "$switchTarget"
+echo -e "\n$($subTitleColor)Switch to $branch$($resetColor)"
 git checkout $branch
 echo -e "$rebase"
 git rebase develop
@@ -48,7 +47,7 @@ echo -e "$switch"
 git checkout develop
 echo -e "$sync"
 git pull origin develop
-echo -e "$switchTarget"
+echo -e "\n$($subTitleColor)Switch to $branch$($resetColor)"
 git checkout $branch
 echo -e "$rebase"
 git rebase develop

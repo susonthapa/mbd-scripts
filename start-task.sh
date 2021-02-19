@@ -7,7 +7,7 @@ reset="tput sgr0"
 # outputs for commands
 switch="$($green)Switch to develop$($reset)"
 sync="\n$($green)Sync develop$($reset)"
-create="\n$($green)Create branch$($reset)"
+create="\n$($green)Create branch $1$($reset)"
 
 # checkout root project
 echo -e "Checking out $($red)APP $($reset)at $1"

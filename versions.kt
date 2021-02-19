@@ -12,8 +12,6 @@ val versionFileName = "versions.gradle"
 val targetBranch = "develop"
 val modulePrefix = ""
 
-main(args)
-
 fun main(args: Array<String>) {
     println("running version increment")
     val workingDir = System.getProperty("user.dir")
@@ -50,8 +48,12 @@ fun main(args: Array<String>) {
     }
     val changedModulesDetails =
         updateVersions(versionList, parsedModules, changedModules, targetPath)
-    println("commit message: $changedModulesDetails")
-    saveChangeLog(changedModulesDetails)
+    if (changedModules.isEmpty()) {
+        println("no modules changed!")
+    } else {
+        println("commit message: $changedModulesDetails")
+        saveChangeLog(changedModulesDetails)
+    }
 }
 
 fun saveChangeLog(changedModules: String) {
