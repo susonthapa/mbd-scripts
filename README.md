@@ -38,6 +38,8 @@ mbd-end-task
 Repeats the above process for  `features` and `libraries` submodules.
 
 #### Version task
+**Note:** This task is assumed to be executed only once during the completion of the task. If for some reason you need increase the version try to do it manually.
+
 For this task to execute you have to create a script `mbd-version-task` (or any name) with the following content and put it in your path.
 ```
 #!/bin/bash
