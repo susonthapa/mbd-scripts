@@ -33,7 +33,7 @@ fun main(args: Array<String>) {
         println("\t$it")
     }
 
-    val changedModules = getChangedModulesName(changedFiles).toMutableList()
+    val changedModules = getChangedModulesName(parsedModules, changedFiles).toMutableList()
     if (defaultModule != null) {
         // check if already have changes in the default module, otherwise fake the changes to trigger version update
         val defaultModuleNotPresent = changedModules.filter { it == defaultModule }.isEmpty()
@@ -168,29 +168,13 @@ fun getVersionString(version: String): Pair<String, String> {
     return Pair(versionList[0].substring(versionPrefix.length), versionList[1].replace("\"", ""))
 }
 
-fun getChangedModulesName(changedFiles: List<String>): List<String> {
-    val settingsFile = File("../settings.gradle")
-    val loadedModules = settingsFile.inputStream().bufferedReader().readLines()
-        .filter {
-            it.contains("include")
-        }
-        .map {
-            it.substring(it.indexOf(":") + 1, it.length - 1)
-                .replace(":", "/")
-        }
-    
-
-    return loadedModules.filter {
+fun getChangedModulesName(parsedModules: List<Module>, changedFiles: List<String>): List<String> {
+    return parsedModules.filter {
         changedFiles.find { file ->
-            file.contains(it)
+            file.startsWith(it.name)
         } != null
     }.map {
-        if (modulePrefix.isEmpty()) {
-            it
-        } else {
-            val lastSlash = it.lastIndexOf("/")
-            it.substring(lastSlash + 1)
-        }
+        it.name
     }
 }
 
