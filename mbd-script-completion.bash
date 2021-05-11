@@ -5,4 +5,4 @@ _mbd_script_branch_complete() {
 }
 
 # register the handler for mbd-switch command
-complete -F _mbd_script_branch_complete mbd-switch-task mbd-switch-hard mbd-end-task
+complete -F _mbd_script_branch_complete iswitch iswitch-hard iend

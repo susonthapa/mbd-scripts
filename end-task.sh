@@ -5,12 +5,13 @@ subTitleColor="tput setaf 2"
 resetColor="tput sgr0"
 # current branch for app layer
 branch=$(git symbolic-ref --short -q HEAD)
+currentDir=${PWD##*/} 
 
 # outputs for commands
-switch="$($subTitleColor)Switch to develop$($resetColor)"
-sync="\n$($subTitleColor)Sync develop$($resetColor)"
+switch="$($subTitleColor)Switch to develop branch$($resetColor)"
+sync="\n$($subTitleColor)Sync develop branch$($resetColor)"
 create="\n$($subTitleColor)Create branch $1$($resetColor)"
-rebase="\n$($subTitleColor)Rebase with develop$($resetColor)"
+rebase="\n$($subTitleColor)Rebase with develop branch$($resetColor)"
 
 # checkout root project
 echo -e "Finalizing changes to $($titleColor)APP $($resetColor)"
@@ -24,9 +25,9 @@ echo -e "$rebase"
 git rebase develop
 echo -e "\n"
 
-# checkout features
-echo -e "Finalizing chnages to $($titleColor)FEATURES $($resetColor)"
-cd features
+# checkout appcore
+echo -e "Finalizing changes to $($titleColor)APPCORE $($resetColor)"
+cd appcore
 branch=$(git symbolic-ref --short -q HEAD)
 echo -e "$switch"
 git checkout develop
@@ -39,9 +40,9 @@ git rebase develop
 echo -e "\n"
 cd ..
 
-# checkout libraries
-echo -e "Finalizing changes to $($titleColor)LIBRARIES $($resetColor)"
-cd libraries
+# checkout banksmartCore
+echo -e "Finalizing changes to $($titleColor)BANKSMARTCORE $($resetColor)"
+cd ../BanksmartCore
 branch=$(git symbolic-ref --short -q HEAD)
 echo -e "$switch"
 git checkout develop
@@ -53,3 +54,8 @@ echo -e "$rebase"
 git rebase develop
 echo -e ""
 cd ..
+cd $currentDir
+
+# initiate pod install
+echo -e "Initiating $($titleColor)POD INSTALL$($resetColor)"
+pod install
